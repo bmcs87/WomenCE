@@ -1,0 +1,5 @@
+install.packages("data.table")
+library(data.table)
+
+data <- fread("Final_Collated_Aug16_Jan19_CE_new.txt")
+colnames(data) <- c("Date", "StateName", "CityName", "Age", "Gender", "Device", "Marketplace", "L1", "L2", "Category1", "Category2", "Category3", "SRPV", "BSRPV", "Impressions", "Clicks", "Revenue")
