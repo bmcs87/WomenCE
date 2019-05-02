@@ -1,5 +1,15 @@
-install.packages("data.table")
-library(data.table)
+install.packages("data.table", "lattice")
+library(data.table, lattice)
 
 data <- fread("Final_Collated_Aug16_Jan19_CE_new.txt")
 colnames(data) <- c("Date", "StateName", "CityName", "Age", "Gender", "Device", "Marketplace", "L1", "L2", "Category1", "Category2", "Category3", "SRPV", "BSRPV", "Impressions", "Clicks", "Revenue")
+
+data.short <- data[data$Gender=="Female", c("Date","Clicks","Impressions", "Revenue")]
+
+acf(data.short, plot=FALSE)
+ar.data.short <- ar(data.short)
+ar.data.short
+
+predict(ar.data.short, n.ahead=365)
+
+ts.plot(data.short, predict(ar.data.short, n.ahead=365)$pred,lty=c(1:2))
